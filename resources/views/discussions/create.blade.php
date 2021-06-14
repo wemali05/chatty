@@ -3,21 +3,24 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('discussion.store') }}">
+            <form  method="POST" action="{{ route('discussion.store') }}" >
+             @csrf
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" id="title" name="title">
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
-                     <input id="content" type="hidden" name="content">
-                     <trix-editor input="content"></trix-editor>
+{{--  
+                    <input id="content" type="hidden" name="content">
+                    <trix-editor input="content"></trix-editor>  --}}
+                     <textarea class="form-control" id="content" name="content" rows="3"></textarea>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <label for="channel">Channel</label>
-                    <select class="form-control" id="channel">
+                    <select name="channel" class="form-control" id="channel">
                         @foreach($channels as $channel)
-                            <option value="{{ $channel->id}}"> {{ $channel->name}} </option>
+                            <option value="{{ $channel->id }}"> {{ $channel->name }} </option>
                         @endforeach
                     </select>
                 </div>
