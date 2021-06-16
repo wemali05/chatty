@@ -53,7 +53,7 @@ class DiscussionController extends Controller
 
         session()->flash('success', 'Discussion created succesfuly');
 
-        return redirect()->route('discussion.index');
+        return redirect()->route('discussions.index');
     }
 
     /**
@@ -62,9 +62,11 @@ class DiscussionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Discussion $discussion)
     {
-        //
+        return view('discussions.show', [
+            'discussion' => $discussion
+        ]);
     }
 
     /**

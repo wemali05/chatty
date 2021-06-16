@@ -2,9 +2,7 @@
 
 @section('content')
 
-         @foreach($discussions as $discussion)
-
-                <div class="card mb-3">
+                 <div class="card mb-3">
                     <div class="card-header">
                          <div class="d-flex justify-content-between">
                             <div>
@@ -21,9 +19,10 @@
 
                     <div class="card-body">
                           <h3>{{ $discussion->title }}</h3>
+                          <hr>
+                          <p>{!! $discussion->content !!}</p>
                     </div>
                 </div>
-            @endforeach
 
             {{--  {{ $discussions->links() }}  --}}
 @endsection

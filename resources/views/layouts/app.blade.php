@@ -81,13 +81,18 @@
                 
                  <div class="row justify-content-center">
                     <div class="col-md-4">
-                        <ul class="list-group">
-                            @foreach($channels as $channel)
-                                <li class="list-group-item">
-                                {{ $channel->name}}
-                                </li>
-                            @endforeach
-                        </ul>
+                        <a href="{{ route('discussions.create')}}" class="btn btn-info w-100 text-white mb-3">Add Discussion</a>
+                        <div class="card">
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    @foreach($channels as $channel)
+                                        <li class="list-group-item">
+                                        {{ $channel->name}}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div> 
                     </div>
 
                     <div class="col-md-8">

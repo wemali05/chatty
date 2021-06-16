@@ -23,5 +23,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::resource('discussion', DiscussionController::class);
+Route::resource('discussions', DiscussionController::class);
 
