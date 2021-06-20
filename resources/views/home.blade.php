@@ -2,7 +2,7 @@
 
 @section('content')
             <div class="d-flex justify-content-end mb-2">
-                <a class="btn btn-success" href="{{ route('discussion.create') }}">
+                <a class="btn btn-success" href="{{ route('discussions.create') }}">
                 Add Discussion
                 </a>
             </div>
