@@ -46,4 +46,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Discussion::class);
     }
+
+    public function getGravatarAttribute()
+    {
+        $hash = md5(strtolower(trim($this->attributes['email'])));
+        return "https://s.gravatar.com/avatar/f09505f95b79007028567a0163507fd7?s=80/$hash";
+    }
 }
