@@ -11,10 +11,9 @@
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
-{{--  
+
                     <input id="content" type="hidden" name="content">
-                    <trix-editor input="content"></trix-editor>  --}}
-                     <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+                    <trix-editor input="content"></trix-editor>
                 </div>
                 <div class="form-group">
                     <label for="channel">Channel</label>
