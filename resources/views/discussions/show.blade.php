@@ -9,14 +9,47 @@
                 <h3>{{ $discussion->title }}</h3>
                 <hr>
                 <p>{!! $discussion->content !!}</p>
+
+                @if($discussion->bestReply)
+                    <div class="card bg-success text-white my-5">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <img src="{{$discussion->bestReply->owner->gravatar}}" width="40" height="40" style="border-radius: 50%"  alt="">
+                                    <span>{{ $discussion->bestReply->owner->name}}</span>
+                                </div>  
+                                <div>
+                                    <span>BEST REPLY</span>
+                                </div>
+                            </div>                      
+                        </div>
+                        <div class="card-body">
+                            {!! $discussion->bestReply->content !!}
+                        </div>
+                    </div>
+                @endif
         </div>
     </div>
 
     @foreach ($discussion->replies()->paginate(3) as $reply)
         <div class="card my-5">
             <div class="card-header">
-                <img src="{{$reply->owner->gravatar}}" width="40" height="40" style="border-radius: 50%"  alt="">
-                <span>{{ $reply->owner->name}}</span>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <img src="{{$reply->owner->gravatar}}" width="40" height="40" style="border-radius: 50%"  alt="">
+                        <span>{{ $reply->owner->name}}</span>
+                    </div>
+    
+
+                    @if($discussion->author->id === auth()->id())
+                    <div>
+                        <form action="{{ route('discussions.best-reply', ['discussion' => $discussion->slug, 'reply' => $reply->id]) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Mark as Best Answer</button>
+                        </form>
+                    </div>    
+                    @endif             
+                </div>
             </div>
             <div class="card-body">
                 <p>{!! $reply->content !!}</p>

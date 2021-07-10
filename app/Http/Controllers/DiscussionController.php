@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reply;
+use App\Models\Discussion;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateDiscussionRequest;
-use App\Models\Discussion;
 
 class DiscussionController extends Controller
 {
@@ -67,6 +68,21 @@ class DiscussionController extends Controller
         return view('discussions.show', [
             'discussion' => $discussion
         ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function reply(Discussion $discussion, Reply $reply)
+    {
+        $discussion->markBestAnswer($reply);
+
+        session()->flash('success', 'Marked as Best Answer');
+
+        return redirect()->back();
     }
 
     /**
