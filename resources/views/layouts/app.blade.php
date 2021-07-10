@@ -76,35 +76,41 @@
             </div>
         </nav>
 
-        @auth()
-            <main class="container py-4">
-                
-                 <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <a href="{{ route('discussions.create')}}" class="btn btn-info w-100 text-white mb-3">Add Discussion</a>
-                        <div class="card">
-                            <div class="card-body">
-                                <ul class="list-group">
-                                    @foreach($channels as $channel)
-                                        <li class="list-group-item">
-                                        {{ $channel->name}}
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div> 
-                    </div>
-
-                    <div class="col-md-8">
-                        @yield('content')
-                    </div>
+       
+        @if(!in_array(request()->path(), ['login', 'register', 'password/email', 'reset/email']))
+        <main class="container py-4">  
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    @auth()
+                    <a href="{{ route('discussions.create')}}" class="btn btn-info w-100 text-white mb-3">Add Discussion</a>
+                    @else
+                    <a href="{{ route('login')}}" class="btn btn-info w-100 text-white mb-3">Login to Add Discussion</a>
+                    @endauth
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                @foreach($channels as $channel)
+                                    <li class="list-group-item">
+                                    {{ $channel->name}}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div> 
                 </div>
-            </main>
+
+                <div class="col-md-8">
+                    @yield('content')
+                </div>
+            </div>
+        </main>
         @else
             <main class="py-4">
                 @yield('content')
             </main>
-        @endauth
+        @endif
+    
+        
     </div>
 
     <!-- Scripts -->
