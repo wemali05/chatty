@@ -12,6 +12,19 @@
         </div>
     </div>
 
+    @foreach ($discussion->replies()->paginate(3) as $reply)
+        <div class="card my-5">
+            <div class="card-header">
+                <img src="{{$reply->owner->gravatar}}" width="40" height="40" style="border-radius: 50%"  alt="">
+                <span>{{ $reply->owner->name}}</span>
+            </div>
+            <div class="card-body">
+                <p>{!! $reply->content !!}</p>
+            </div>
+        </div>
+    @endforeach
+    {{ $discussion->replies()->paginate(3)->links() }}
+
     @auth
     <div class="card my-5">
         <div class="card-header">
@@ -25,7 +38,6 @@
                       
                     <input id="content" type="hidden" name="content">
                     <trix-editor input="content"></trix-editor>
-                     {{--  <textarea class="form-control" id="content" name="content" rows="3"></textarea>  --}}
                 </div>
 
                 <button type="submit" class="btn btn-small btn-success">Add Reply</button>
@@ -36,7 +48,6 @@
         <a href="{{ route('login')}}" class="btn my-2 text-white btn-info">Sign In to Add a Reply</a>
     @endauth
 
-    {{--  {{ $discussions->links() }}  --}}
 @endsection
 
 @section('css')
@@ -44,5 +55,5 @@
 @endsection
 
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js" integrity="sha512-2RLMQRNr+D47nbLnsbEqtEmgKy67OSCpWJjJM394czt99xj3jJJJBQ43K7lJpfYAYtvekeyzqfZTx2mqoDh7vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js" integrity="sha512-2RLMQRNr+D47nbLnsbEqtEmgKy67OSCpWJjJM394czt99xj3jJJJBQ43K7lJpfYAYtvekeyzqfZTx2mqoDh7vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
