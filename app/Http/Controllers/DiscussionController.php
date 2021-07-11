@@ -6,6 +6,7 @@ use App\Models\Reply;
 use App\Models\Discussion;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Notifications\ReplyMarkedAsBestReply;
 use App\Http\Requests\CreateDiscussionRequest;
 
 class DiscussionController extends Controller
@@ -81,6 +82,8 @@ class DiscussionController extends Controller
         $discussion->markBestAnswer($reply);
 
         session()->flash('success', 'Marked as Best Answer');
+
+        $reply->owner->notify(new ReplyMarkedAsBestReply($reply->discussion));
 
         return redirect()->back();
     }

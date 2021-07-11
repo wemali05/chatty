@@ -40,7 +40,6 @@
                         <span>{{ $reply->owner->name}}</span>
                     </div>
     
-
                     @if($discussion->author->id === auth()->id())
                     <div>
                         <form action="{{ route('discussions.best-reply', ['discussion' => $discussion->slug, 'reply' => $reply->id]) }}" method="POST">
@@ -48,7 +47,7 @@
                             <button type="submit" class="btn btn-primary">Mark as Best Answer</button>
                         </form>
                     </div>    
-                    @endif             
+                    @endif       
                 </div>
             </div>
             <div class="card-body">
