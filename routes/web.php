@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\DiscussionController;
 
@@ -29,6 +30,6 @@ Route::resource('discussions', DiscussionController::class);
 
 Route::resource('discussions/{discussion}/replies', RepliesController::class);
 
-Route::get('users/notifications', [UsersController::class, 'notifications']);
+Route::get('users/notifications', [UsersController::class, 'notifications'])->name('users.notifications');
 
 Route::post('discussions/{discussion}/replies/{reply}/mark-as-best_reply', [DiscussionController::class, 'reply'])->name('discussions.best-reply');

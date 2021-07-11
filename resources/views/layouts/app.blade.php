@@ -36,7 +36,7 @@
                     <ul class="navbar-nav mr-auto">
                         @auth()
                         <li class="nav-itm">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('users.notifications')}}" class="nav-link">
                                 <span class="bagde badge-info text-white">
                                     {{ auth()->user()->unreadNotifications->count()}}
                                     unread Notifications
