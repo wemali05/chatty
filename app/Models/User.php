@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Discussion;
+use App\Notifications\VerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -56,5 +57,15 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $hash = md5(strtolower(trim($this->attributes['email'])));
         return "https://s.gravatar.com/avatar/f09505f95b79007028567a0163507fd7?s=80/$hash";
+    }
+
+        /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail());
     }
 }
