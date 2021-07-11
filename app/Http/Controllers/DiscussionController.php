@@ -83,7 +83,6 @@ class DiscussionController extends Controller
 
         session()->flash('success', 'Marked as Best Answer');
 
-        $reply->owner->notify(new ReplyMarkedAsBestReply($reply->discussion));
 
         return redirect()->back();
     }

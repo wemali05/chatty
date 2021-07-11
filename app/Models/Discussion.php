@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Reply;
+use App\Notifications\ReplyMarkedAsBestReply;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Discussion extends Model
@@ -50,5 +51,11 @@ class Discussion extends Model
         $this->update([
             'reply_id' => $reply->id
         ]);
+
+        if($reply->owner->id === $this->author->id) {
+            return;
+        }
+
+        $reply->owner->notify(new ReplyMarkedAsBestReply($reply->discussion));
     }
 }
