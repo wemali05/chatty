@@ -30,6 +30,21 @@ class Discussion extends Model
         return $this->belongsTo(Reply::class, 'reply_id');
     }
 
+    public function scopeFilterByChannels($builder)
+    {
+        if(request()->query('channel')){
+            $channel = Channel::where('slug', request()->query('channel'))->first();
+
+            if($channel){
+                return $builder->where('channel_id', $channel->id);
+            }
+
+            return $builder;
+        }
+
+        return $builder;
+    }
+
     public function markBestAnswer(Reply $reply)
     {
         $this->update([
