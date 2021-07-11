@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\CreateReplyRequest;
 use App\Models\Discussion;
+use Illuminate\Http\Request;
+use App\Notifications\NewReplyAdded;
+use App\Http\Requests\CreateReplyRequest;
 
 class RepliesController extends Controller
 {
@@ -40,6 +41,8 @@ class RepliesController extends Controller
             'discussion_id' => $discussion->id,
             'content' => $request->content
         ]);
+
+        $discussion->author->notify(new NewReplyAdded($discussion));
 
         session()->flash('success', 'Your reply has been saves succesfully');
 
